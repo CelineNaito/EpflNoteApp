@@ -12,16 +12,18 @@ def enter_note():
 def search_notes():
     noteapp= open("noteapp.txt")
     content = noteapp.read()
-    array = content.split("\n")
+    print(content)
+    #array = content.split("\n")
     #TypeError: 'str' object cannot be interpreted as an integer
     search_word = input("What word do you want to search? ")
-    result = ""
+    #result = ""
     
-    for line in array:
-        if line.find(search_word) != -1:
-            print(result)
-        else:
-            print("The word you searched was not found")
+    for line in content:
+        print(line)
+        #if line.find(search_word) != -1:
+        #    print(line)
+        #else:
+        #    print("The word you searched was not found")
     noteapp.close()
 
 if choice == "1":
