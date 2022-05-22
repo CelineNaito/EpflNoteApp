@@ -13,8 +13,9 @@ def get_html(page_name):
 def get_notes():
     notes= open("noteapp.text")
     content= notes.read()
-    notes.close()
     all_notes = content.split("\n")
+    all_notes.pop(len(all_notes)-1)
+    notes.close()
     return all_notes
 
 @app.route("/")
@@ -29,14 +30,19 @@ def add():
 @app.route("/result")
 def result():
     html_page = get_html("result")
-    search_value = request.args.get("search_word")
-    search_notes = get_notes()
+    search_value = request.args.get("search_word") #flask is not defined!
+    notes = get_notes()
+    #search_notes.lower() says list ahs no attribute
     result = ""
+
     for note in notes:
-        if note.lower().find(search_value.lower()) != -1:
-            result += "<li>" +note + "</li>"
-        if result == "":
-            result += "<p> no matching note </P>"
+      if note.find(str(search_value)) != -1: #lower() n'est pas accepté, object has no attribute
+        result += "<p>" + note + "<p>"
+
+    if result == "":
+            result = "<p> no matching note </p>"
+
+           
     return html_page.replace("§§placeholder§§", result)
 
 @app.route("/view")

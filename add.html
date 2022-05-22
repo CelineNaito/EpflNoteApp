@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>add a note</title>
+  <link rel="stylesheet" href="static/style.css">
+ 
   
 </head>
 <body>
     <nav class="navbar">
         <form action="/">
-            <button type="submit">Home</button> 
+            <button type="submit" class="submit_button">Home</button> 
         </form>
         
         <form action="/view">
-            <button type="submit">See all notes</button>
+            <button type="submit" class=" submit_button">See all notes</button>
         </form>
        
         <form action="/result" method="get">
@@ -24,12 +26,15 @@
 
 
     </nav>
-    <h1>Enter a new note</h1>
 
-    <form action="/save_note" method="get">
-        <input type="text" name="q" placeholder="" id="user_note" class="textbox">
-        <input type="submit" value="save" class="submit_button">
-    </form>
+    <div class="main">
+        <h1>Enter a new note</h1>
+
+        <form action="/save_note" method="get">
+            <input type="text" name="q" placeholder="" id="user_note" class="textbox">
+            <input type="submit" value="save" class="submit_button">
+        </form>
+    </div>
 
 
 </body>
