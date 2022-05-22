@@ -10,6 +10,12 @@ def get_html(page_name):
     html_file.close()
     return content
 
+def get_notes():
+    notes= open("noteapp.text")
+    content= notes.read()
+    notes.close()
+    all_notes = content.split("\n")
+    return all_notes
 
 @app.route("/")
 def home():
@@ -22,11 +28,26 @@ def add():
 
 @app.route("/result")
 def result():
-    return get_html("result")
+    html_page = get_html("result")
+    search_value = request.args.get("search_word")
+    search_notes = get_notes()
+    result = ""
+    for note in notes:
+        if note.lower().find(search_value.lower()) != -1:
+            result += "<li>" +note + "</li>"
+        if result == "":
+            result += "<p> no matching note </P>"
+    return html_page.replace("§§placeholder§§", result)
 
 @app.route("/view")
 def view():
-    return get_html("view")
+    html_page = get_html("view")
+    notes_to_show = get_notes()
+    actual_values= " "
+    for note in notes_to_show:
+        actual_values += "<li>" +note + "</li>"
+    return html_page.replace ("§§notes§§", actual_values)
+
 
 @app.route("/save_note")
 def save_note():
@@ -40,20 +61,13 @@ def save_note():
 
 
 
-
-
-
-#choice = input("what do you want to do? 1 Enter a new note; 2 Search your notes; 3 Quit the notepad ")
-
-
-
-def enter_note():
+#def enter_note():
     note = open("noteapp.txt", "a")
     new_line = input("Please enter your note: ")
     note.write (new_line + "\n")
     note.close()
 
-def search_notes():
+#def search_notes():
     noteapp= open("noteapp.text")
     #content = noteapp.read()
     #array = content.split("\n")
