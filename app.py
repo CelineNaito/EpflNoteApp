@@ -30,13 +30,13 @@ def add():
 @app.route("/result")
 def result():
     html_page = get_html("result")
-    search_value = request.args.get("search_word") #flask is not defined!
+    search_value = request.args.get("search_input") #flask is not defined!
     notes = get_notes()
-    #search_notes.lower() says list ahs no attribute
+
     result = ""
 
     for note in notes:
-      if note.find(str(search_value)) != -1: #lower() n'est pas accepté, object has no attribute
+      if note.lower().find(search_value.lower()) != -1: 
         result += "<p>" + note + "<p>"
 
     if result == "":
